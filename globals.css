@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b0f16;
+  --card: #111827;
+  --text: #e6f2ff;
+  --accent: #9AE6B4;
+}
+
+html, body, #__next { height: 100%; }
+body {
+  background: radial-gradient(1200px 800px at 80% -10%, rgba(154,230,180,0.15), transparent 50%),
+              radial-gradient(1200px 800px at -10% 80%, rgba(230,242,255,0.08), transparent 50%),
+              var(--bg);
+  color: var(--text);
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-4;
+}
