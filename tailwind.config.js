@@ -8,7 +8,7 @@ module.exports = {
           bg: "#0b0f16",
           card: "#111827",
           accent: "#9AE6B4",
-          soft: "#e6f2ff"
+          soft: "#070B17"
         }
       },
       boxShadow: {
