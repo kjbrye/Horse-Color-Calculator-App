@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -211,7 +213,7 @@ function Field({ label, value, onChange, options }) {
   );
 }
 
-function Chip({ children, tone }) {
+function Chip({ children, tone = "base" }: { children: React.ReactNode; tone?: string }) {
   const toneClass = (
     tone === "base" ? "border-sky-300/60 bg-sky-50/60" :
     tone === "dilution" ? "border-amber-300/60 bg-amber-50/60" :
@@ -225,7 +227,7 @@ function Chip({ children, tone }) {
   );
 }
 
-function Section({ title, subtitle, children, defaultOpen=true }) {
+function Section({ title, subtitle, children, defaultOpen = true }: { title: string; subtitle?: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <Card className="rounded-2xl shadow-sm border-0 bg-white/80 backdrop-blur">
