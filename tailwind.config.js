@@ -11,6 +11,9 @@ module.exports = {
           soft: "#070B17"
         }
       },
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+      },
       boxShadow: {
         'glow': '0 0 40px rgba(154, 230, 180, 0.25)'
       }
