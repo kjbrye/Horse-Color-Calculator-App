@@ -1,10 +1,11 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Horse Coat Color Calculator",
   description: "A glam UI to explore horse coat genetics",
   manifest: "/manifest.json",
