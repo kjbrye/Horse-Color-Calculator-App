@@ -8,10 +8,10 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ className, variant = "default", size = "md", ...props }: ButtonProps) {
   const variants = {
-    default: "bg-white/5 hover:bg-white/10 border border-white/10",
-    outline: "bg-transparent border border-white/20 hover:bg-white/5",
-    ghost: "bg-transparent hover:bg-white/5",
-    secondary: "bg-white/5 hover:bg-white/10 border border-white/20"
+    default: "bg-glam-accent hover:bg-glam-accent/90 border border-glam-accent/20",
+    outline: "bg-transparent text-glam-accent border border-glam-accent hover:bg-glam-accent/10",
+    ghost: "bg-transparent text-glam-accent hover:bg-glam-accent/10",
+    secondary: "bg-glam-card text-glam-accent hover:bg-glam-card/80 border border-glam-card"
   };
   const sizes = {
     sm: "px-3 py-1.5 text-sm rounded-md",
@@ -20,7 +20,12 @@ export function Button({ className, variant = "default", size = "md", ...props }
   };
   return (
     <button
-      className={cn("text-white transition shadow-glow", variants[variant], sizes[size], className)}
+      className={cn(
+        "text-[var(--text)] transition shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glam-accent focus-visible:ring-offset-2 focus-visible:ring-offset-glam-bg",
+        variants[variant],
+        sizes[size],
+        className
+      )}
       {...props}
     />
   );
