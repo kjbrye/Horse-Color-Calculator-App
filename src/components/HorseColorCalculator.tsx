@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Info, Eraser, AlertTriangle, Sparkles, ChevronDown, ChevronRight } from "lucide-react";
+import HorseImage from "./HorseImage";
 
 /*
   Horse Coat Color Calculator — glam edition (fixed)
@@ -192,7 +193,7 @@ function computePhenotype(g) {
   const withNotes = notes.length ? `${main} ${notes.map((n) => `(${n})`).join(" ")}` : main;
   const text = applyGray(g.G, withNotes);
   const alerts = alertNotes(g);
-  return { text, alerts, tags, notes };
+  return { text, alerts, tags, notes, colorName: diluted, baseColor: base };
 }
 
 // ---------- UI bits ----------
@@ -345,7 +346,8 @@ export default function HorseColorCalculator() {
 
           <div className="lg:col-span-1 space-y-6">
             <Section title="Predicted phenotype" defaultOpen={true}>
-              <div className="text-2xl leading-snug">{phenotype.text || "—"}</div>
+              <HorseImage baseColor={phenotype.baseColor} />
+              <div className="text-2xl leading-snug text-center">{phenotype.text || "—"}</div>
 
               {phenotype.tags && phenotype.tags.length > 0 ? (
                 <div className="mt-3 flex flex-wrap gap-2">
