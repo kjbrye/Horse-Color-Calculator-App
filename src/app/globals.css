@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0b0f16;
-  --card: #111827;
-  --text: #070B17;
+  /* Light theme colors for improved readability */
+  --bg: #f9fafb;
+  --card: #ffffff;
+  --text: #1a202c;
   --accent: #9AE6B4;
 }
 
@@ -15,6 +16,7 @@ body {
               radial-gradient(1200px 800px at -10% 80%, rgba(230,242,255,0.08), transparent 50%),
               var(--bg);
   color: var(--text);
+  @apply text-lg;
 }
 
 .container {

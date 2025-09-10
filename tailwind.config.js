@@ -5,10 +5,10 @@ module.exports = {
     extend: {
       colors: {
         glam: {
-          bg: "#0b0f16",
-          card: "#111827",
+          bg: "#f9fafb",
+          card: "#ffffff",
           accent: "#9AE6B4",
-          soft: "#070B17"
+          soft: "#1a202c"
         }
       },
       fontFamily: {
