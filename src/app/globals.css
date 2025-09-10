@@ -5,14 +5,18 @@
 :root {
   --bg: #f8fafc;
   --card: #ffffff;
-  --text: #070B17;
+  --text: #070b17;
   --accent: #16a34a;
 }
 
 html, body, #__next { height: 100%; }
 body {
-  background: radial-gradient(1200px 800px at 80% -10%, rgba(22,163,74,0.15), transparent 50%),
-              radial-gradient(1200px 800px at -10% 80%, rgba(59,130,246,0.1), transparent 50%),
+  background: radial-gradient(
+                1200px 800px at 80% -10%, rgba(22, 163, 74, 0.15), transparent 50%
+              ),
+              radial-gradient(
+                1200px 800px at -10% 80%, rgba(22, 163, 74, 0.05), transparent 50%
+              ),
               var(--bg);
   color: var(--text);
 }
