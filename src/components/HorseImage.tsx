@@ -24,7 +24,7 @@ export default function HorseImage({ baseColor, tags = [] }: { baseColor?: strin
   return (
     <div className="w-full mb-4 flex items-center justify-center rounded-2xl border bg-white/80 shadow-sm p-4">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={`${baseColor} horse`} className="w-32 h-32" />
+      <img src={src} alt={`${baseColor} horse`} className="w-64 h-64" />
     </div>
   );
 }
