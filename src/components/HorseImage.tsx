@@ -6,11 +6,15 @@ const IMAGE_MAP: Record<string, string> = {
   Black: "/horse/black.svg",
   "Amber Champagne": "/horse/Amber Champagne.svg",
   "Classic Champagne": "/horse/Classic Champagne.svg",
-  Cremello: "/horse/Classic Champagne.svg",
+  Cremello: "/horse/Cremello.svg",
+  Buckskin: "/horse/buckskin.svg",
 };
 
 function getImage(colorName?: string, tags: string[] = []) {
   if (!colorName) return undefined;
+  if (colorName === "Cremello") {
+    return "/horse/Cremello.svg";
+  }
   if (colorName === "Bay Dun") {
     if (tags.includes("Frame Overo")) return "/horse/Overo Dun.svg";
     if (tags.includes("Roan")) return "/horse/Dun roan.svg";
@@ -39,6 +43,13 @@ function getImage(colorName?: string, tags: string[] = []) {
   }
   if (colorName === "Chestnut") {
     if (tags.includes("Frame Overo")) return "/horse/Overo chestnut.svg";
+  }
+  if (colorName === "Buckskin") {
+    const hasOvero = tags.includes("Frame Overo");
+    const hasRoan = tags.includes("Roan");
+    if (hasRoan) return "/horse/buckskin roan.svg";
+    if (hasOvero) return "/horse/overo buckskin.svg";
+    return "/horse/buckskin.svg";
   }
   if (colorName.includes("Pearl")) {
     if (tags.includes("Frame Overo")) return "/horse/Overo Pearl or Cream pearl.svg";
