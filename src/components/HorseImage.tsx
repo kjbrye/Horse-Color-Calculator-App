@@ -10,7 +10,7 @@ const IMAGE_MAP: Record<string, string> = {
   Buckskin: "/horse/buckskin.svg",
   Palomino: "/horse/palomino.svg",
   "Silver Buckskin": "/horse/silver buckskin.svg",
-  "Silver Bay": "/horse/Silver bay.svg",
+  "Silver Bay": "/horse/bay-silver.svg",
 };
 
 function getImage(colorName?: string, tags: string[] = []) {
@@ -35,21 +35,21 @@ function getImage(colorName?: string, tags: string[] = []) {
     if (hasRoan) {
       if (hasOvero) {
         if (hasSplash) return "/horse/bay-overo-splash.svg";
-        return "/horse/overo bay.svg";
+        return "/horse/bay-overo.svg";
       }
       if (hasSplash) return "/horse/bay-roan-splash.svg";
-      return "/horse/bay roan.svg";
+      return "/horse/bay-roan.svg";
     }
     if (hasSplash && hasOvero) return "/horse/bay-overo-splash.svg";
     if (hasSplash) return "/horse/bay-splash.svg";
-    if (hasOvero) return "/horse/overo bay.svg";
+    if (hasOvero) return "/horse/bay-overo.svg";
   }
   if (colorName === "Chestnut") {
     const hasOvero = tags.includes("Frame Overo");
     const hasRoan = tags.includes("Roan");
     const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) return "/horse/chestnut roan.svg";
-    if (hasOvero) return "/horse/Overo chestnut.svg";
+    if (hasRoan) return "/horse/chestnut-roan.svg";
+    if (hasOvero) return "/horse/chestnut-overo.svg";
     if (hasSplash) return "/horse/chestnut-splash.svg";
     return "/horse/chestnut.svg";
   }
@@ -57,15 +57,15 @@ function getImage(colorName?: string, tags: string[] = []) {
     const hasOvero = tags.includes("Frame Overo");
     const hasRoan = tags.includes("Roan");
     const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) return "/horse/black roan.svg";
+    if (hasRoan) return "/horse/black-roan.svg";
     if (hasOvero && hasSplash) return "/horse/black-overo-splash.svg";
-    if (hasOvero) return "/horse/overo black.svg";
+    if (hasOvero) return "/horse/black-overo.svg";
     return "/horse/black.svg";
   }
   if (colorName === "Buckskin") {
     const hasOvero = tags.includes("Frame Overo");
     const hasRoan = tags.includes("Roan");
-    if (hasRoan) return "/horse/buckskin roan.svg";
+    if (hasRoan) return "/horse/buckskin-roan.svg";
     if (hasOvero) return "/horse/overo buckskin.svg";
     return "/horse/buckskin.svg";
   }
@@ -86,9 +86,9 @@ function getImage(colorName?: string, tags: string[] = []) {
   if (colorName === "Silver Bay") {
     const hasOvero = tags.includes("Frame Overo");
     const hasRoan = tags.includes("Roan");
-    if (hasOvero) return "/horse/overo Silver bay.svg";
-    if (hasRoan) return "/horse/Silver bay roan.svg";
-    return "/horse/Silver bay.svg";
+    if (hasOvero) return "/horse/bay-silver-overo.svg";
+    if (hasRoan) return "/horse/bay-silver-roan.svg";
+    return "/horse/bay-silver.svg";
   }
   if (colorName === "Silver Black") {
     if (tags.includes("Frame Overo")) return "/horse/silver overo black.svg";
