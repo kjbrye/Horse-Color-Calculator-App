@@ -9,7 +9,7 @@ const IMAGE_MAP: Record<string, string> = {
   Cremello: "/horse/cremello.svg",
   Buckskin: "/horse/buckskin.svg",
   Palomino: "/horse/palomino.svg",
-  "Silver Buckskin": "/horse/silver buckskin.svg",
+  "Silver Buckskin": "/horse/buckskin-silver.svg",
   "Silver Bay": "/horse/bay-silver.svg",
 };
 
@@ -24,8 +24,15 @@ function getImage(colorName?: string, tags: string[] = []) {
     return "/horse/bay-dun.svg";
   }
   if (colorName === "Grullo") {
-    if (tags.includes("Frame Overo")) return "/horse/grullo-overo.svg";
-    if (tags.includes("Roan")) return "/horse/grullo-roan.svg";
+    const hasOvero = tags.includes("Frame Overo");
+    const hasRoan = tags.includes("Roan");
+    const hasSplash = tags.includes("Splashed White");
+    if (hasRoan) {
+      if (hasSplash) return "/horse/grullo-roan-splash.svg";
+      return "/horse/grullo-roan.svg";
+    }
+    if (hasOvero) return "/horse/grullo-overo.svg";
+    if (hasSplash) return "/horse/grullo-splash.svg";
     return "/horse/grullo.svg";
   }
   if (colorName === "Bay") {
@@ -79,9 +86,13 @@ function getImage(colorName?: string, tags: string[] = []) {
   if (colorName === "Silver Buckskin") {
     const hasOvero = tags.includes("Frame Overo");
     const hasRoan = tags.includes("Roan");
-    if (hasRoan) return "/horse/silver buckskin roan.svg";
-    if (hasOvero) return "/horse/silver overo buckskin.svg";
-    return "/horse/silver buckskin.svg";
+    const hasSplash = tags.includes("Splashed White");
+    if (hasRoan) return "/horse/buckskin-silver-roan.svg";
+    if (hasOvero) {
+      if (hasSplash) return "/horse/buckskin-silver-overo-splash.svg";
+      return "/horse/buckskin-silver-overo.svg";
+    }
+    return "/horse/buckskin-silver.svg";
   }
   if (colorName === "Silver Bay") {
     const hasOvero = tags.includes("Frame Overo");
@@ -91,7 +102,7 @@ function getImage(colorName?: string, tags: string[] = []) {
     return "/horse/bay-silver.svg";
   }
   if (colorName === "Silver Black") {
-    if (tags.includes("Frame Overo")) return "/horse/silver overo black.svg";
+    if (tags.includes("Frame Overo")) return "/horse/black-silver-overo.svg";
     return "/horse/black.svg";
   }
   if (colorName.includes("Pearl")) {
