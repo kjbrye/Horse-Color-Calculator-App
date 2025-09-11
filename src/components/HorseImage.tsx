@@ -4,8 +4,8 @@ const IMAGE_MAP: Record<string, string> = {
   Chestnut: "/horse/chestnut.svg",
   Bay: "/horse/bay.svg",
   Black: "/horse/black.svg",
-  "Amber Champagne": "/horse/Amber Champagne.svg",
-  "Classic Champagne": "/horse/Classic Champagne.svg",
+  "Amber Champagne": "/horse/amber-champagne.svg",
+  "Classic Champagne": "/horse/classic-champagne.svg",
   Cremello: "/horse/Cremello.svg",
   Buckskin: "/horse/buckskin.svg",
   Palomino: "/horse/palomino.svg",
@@ -20,7 +20,7 @@ function getImage(colorName?: string, tags: string[] = []) {
   }
   if (colorName === "Bay Dun") {
     if (tags.includes("Frame Overo")) return "/horse/Overo Dun.svg";
-    if (tags.includes("Roan")) return "/horse/Dun roan.svg";
+    if (tags.includes("Roan")) return "/horse/bay-dun-roan.svg";
     return "/horse/Dun.svg";
   }
   if (colorName === "Grullo") {
