@@ -11,6 +11,11 @@ function getImage(baseColor?: string, tags: string[] = []) {
   if (baseColor === "Bay") {
     const hasSplash = tags.includes("Splashed White");
     const hasOvero = tags.includes("Frame Overo");
+    const hasRoan = tags.includes("Roan");
+    if (hasRoan) {
+      if (hasSplash) return "/horse/SW1 bay roan.svg";
+      return "/horse/bay roan.svg";
+    }
     if (hasSplash && hasOvero) return "/horse/SW1 overo bay.svg";
     if (hasSplash) return "/horse/SW1 bay.svg";
     if (hasOvero) return "/horse/overo bay.svg";
