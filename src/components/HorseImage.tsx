@@ -6,13 +6,23 @@ const IMAGE_MAP: Record<string, string> = {
   Black: "/horse/black.svg",
 };
 
-function getImage(name?: string) {
-  if (!name) return undefined;
-  return IMAGE_MAP[name];
+function getImage(baseColor?: string, tags: string[] = []) {
+  if (!baseColor) return undefined;
+  if (baseColor === "Bay") {
+    const hasSplash = tags.includes("Splashed White");
+    const hasOvero = tags.includes("Frame Overo");
+    const hasRoan = tags.includes("Roan");
+    if (hasOvero && hasSplash) return "/horse/SW1 overo bay.svg";
+    if (hasOvero) return "/horse/overo bay.svg";
+    if (hasRoan && hasSplash) return "/horse/SW1 bay roan.svg";
+    if (hasRoan) return "/horse/bay roan.svg";
+    if (hasSplash) return "/horse/SW1 bay.svg";
+  }
+  return IMAGE_MAP[baseColor];
 }
 
-export default function HorseImage({ baseColor }: { baseColor?: string }) {
-  const src = getImage(baseColor);
+export default function HorseImage({ baseColor, tags = [] }: { baseColor?: string; tags?: string[] }) {
+  const src = getImage(baseColor, tags);
   if (!src) return null;
   return (
     <div className="w-full mb-4 flex items-center justify-center rounded-2xl border bg-white/80 shadow-sm p-4">
