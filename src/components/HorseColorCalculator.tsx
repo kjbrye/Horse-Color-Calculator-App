@@ -346,7 +346,7 @@ export default function HorseColorCalculator() {
 
           <div className="lg:col-span-1 space-y-6">
             <Section title="Predicted phenotype" defaultOpen={true}>
-              <HorseImage baseColor={phenotype.baseColor} tags={phenotype.tags} />
+              <HorseImage colorName={phenotype.colorName} tags={phenotype.tags} />
               <div className="text-2xl leading-snug text-center">{phenotype.text || "—"}</div>
 
               {phenotype.tags && phenotype.tags.length > 0 ? (
