@@ -22,7 +22,10 @@ function toSlug(name: string): string {
 
 function getBaseSrc(colorName?: string, tags: string[] = []) {
   if (!colorName) return undefined;
-  const slug = toSlug(colorName);
+  let slug = toSlug(colorName);
+  if (slug === "smoky-black") {
+    slug = "black";
+  }
   const base = tags.includes("Roan") ? `${slug}-roan` : slug;
   return `${BASE_PATH}/${base}.svg`;
 }
