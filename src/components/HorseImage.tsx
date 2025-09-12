@@ -1,127 +1,70 @@
 import React from "react";
 
-const IMAGE_MAP: Record<string, string> = {
-  Chestnut: "/horse/chestnut.svg",
-  Bay: "/horse/bay.svg",
-  Black: "/horse/black.svg",
-  "Amber Champagne": "/horse/amber-champagne.svg",
-  "Classic Champagne": "/horse/classic-champagne.svg",
-  Cremello: "/horse/cremello.svg",
-  Buckskin: "/horse/buckskin.svg",
-  Palomino: "/horse/palomino.svg",
-  "Silver Buckskin": "/horse/buckskin-silver.svg",
-  "Silver Bay": "/horse/bay-silver.svg",
-};
+const BASE_PATH = "/horse/base";
+const PATTERN_PATH = "/horse/patterns";
 
-function getImage(colorName?: string, tags: string[] = []) {
-  if (!colorName) return undefined;
-  if (colorName === "Cremello") {
-    return "/horse/cremello.svg";
+function toSlug(name: string): string {
+  let n = name.toLowerCase();
+  n = n.replace(/\s*\(.*?\)/g, "");
+  let suffix = "";
+  if (n.startsWith("silver ")) {
+    n = n.replace(/^silver\s+/, "");
+    suffix = "-silver";
   }
-  if (colorName === "Bay Dun") {
-    if (tags.includes("Frame Overo")) return "/horse/bay-dun-overo.svg";
-    if (tags.includes("Roan")) return "/horse/bay-dun-roan.svg";
-    return "/horse/bay-dun.svg";
+  if (n.startsWith("pearl-cream")) {
+    n = n.replace("pearl-cream", "cream-pearl");
+  } else if (n.startsWith("pearl")) {
+    n = n.replace("pearl", "cream-pearl");
   }
-  if (colorName === "Grullo") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) {
-      if (hasSplash) return "/horse/grullo-roan-splash.svg";
-      return "/horse/grullo-roan.svg";
-    }
-    if (hasOvero) return "/horse/grullo-overo.svg";
-    if (hasSplash) return "/horse/grullo-splash.svg";
-    return "/horse/grullo.svg";
-  }
-  if (colorName === "Bay") {
-    const hasSplash = tags.includes("Splashed White");
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    if (hasRoan) {
-      if (hasOvero) {
-        if (hasSplash) return "/horse/bay-overo-splash.svg";
-        return "/horse/bay-overo.svg";
-      }
-      if (hasSplash) return "/horse/bay-roan-splash.svg";
-      return "/horse/bay-roan.svg";
-    }
-    if (hasSplash && hasOvero) return "/horse/bay-overo-splash.svg";
-    if (hasSplash) return "/horse/bay-splash.svg";
-    if (hasOvero) return "/horse/bay-overo.svg";
-  }
-  if (colorName === "Chestnut") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) return "/horse/chestnut-roan.svg";
-    if (hasOvero) return "/horse/chestnut-overo.svg";
-    if (hasSplash) return "/horse/chestnut-splash.svg";
-    return "/horse/chestnut.svg";
-  }
-  if (colorName === "Black") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) return "/horse/black-roan.svg";
-    if (hasOvero && hasSplash) return "/horse/black-overo-splash.svg";
-    if (hasOvero) return "/horse/black-overo.svg";
-    return "/horse/black.svg";
-  }
-  if (colorName === "Buckskin") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    if (hasRoan) return "/horse/buckskin-roan.svg";
-    if (hasOvero) return "/horse/overo buckskin.svg";
-    return "/horse/buckskin.svg";
-  }
-  if (colorName === "Palomino") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    if (hasRoan) return "/horse/palomino roan.svg";
-    if (hasOvero) return "/horse/overo palomino.svg";
-    return "/horse/palomino.svg";
-  }
-  if (colorName === "Silver Buckskin") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    const hasSplash = tags.includes("Splashed White");
-    if (hasRoan) return "/horse/buckskin-silver-roan.svg";
-    if (hasOvero) {
-      if (hasSplash) return "/horse/buckskin-silver-overo-splash.svg";
-      return "/horse/buckskin-silver-overo.svg";
-    }
-    return "/horse/buckskin-silver.svg";
-  }
-  if (colorName === "Silver Bay") {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasRoan = tags.includes("Roan");
-    if (hasOvero) return "/horse/bay-silver-overo.svg";
-    if (hasRoan) return "/horse/bay-silver-roan.svg";
-    return "/horse/bay-silver.svg";
-  }
-  if (colorName === "Silver Black") {
-    if (tags.includes("Frame Overo")) return "/horse/black-silver-overo.svg";
-    return "/horse/black.svg";
-  }
-  if (colorName.includes("Pearl")) {
-    const hasOvero = tags.includes("Frame Overo");
-    const hasSplash = tags.includes("Splashed White");
-    if (hasOvero && hasSplash) return "/horse/cream-pearl-overo-splash.svg";
-    if (hasOvero) return "/horse/cream-pearl-overo.svg";
-    return "/horse/cream-pearl.svg";
-  }
-  return IMAGE_MAP[colorName];
+  n = n.replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
+  return n + suffix;
 }
 
-export default function HorseImage({ colorName, tags = [] }: { colorName?: string; tags?: string[] }) {
-  const src = getImage(colorName, tags);
-  if (!src) return null;
+function getBaseSrc(colorName?: string, tags: string[] = []) {
+  if (!colorName) return undefined;
+  const slug = toSlug(colorName);
+  const base = tags.includes("Roan") ? `${slug}-roan` : slug;
+  return `${BASE_PATH}/${base}.svg`;
+}
+
+function patternSlug(tag: string) {
+  if (tag === "Roan") return undefined; // handled in base
+  if (tag === "Tobiano Overo (Tovero)") return "tobiano";
+  if (tag.startsWith("Dominant White")) return "dominant-white";
+  return tag
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function getPatternSrcs(tags: string[]) {
+  return tags
+    .map(patternSlug)
+    .filter(Boolean)
+    .map((slug) => `${PATTERN_PATH}/${slug}.svg`);
+}
+
+export default function HorseImage({
+  colorName,
+  tags = [],
+}: {
+  colorName?: string;
+  tags?: string[];
+}) {
+  const base = getBaseSrc(colorName, tags);
+  const overlays = getPatternSrcs(tags);
+  if (!base) return null;
   return (
     <div className="w-full mb-4 flex items-center justify-center rounded-2xl border bg-white/80 shadow-sm p-4">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={`${colorName} horse`} className="w-64 h-64" />
+      <div className="relative w-64 h-64">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={base} alt={`${colorName} base`} className="absolute inset-0 w-full h-full" />
+        {overlays.map((src) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={src} src={src} alt="" className="absolute inset-0 w-full h-full" />
+        ))}
+      </div>
     </div>
   );
 }
+
